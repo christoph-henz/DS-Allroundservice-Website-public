@@ -1,0 +1,369 @@
+/* ==========================================================================
+   DS-Allroundservice - Questionnaire Styles
+   ========================================================================== */
+
+/* Import base styles */
+@import url('home.css');
+
+/* ==========================================================================
+   Questionnaire Container
+   ========================================================================== */
+
+.questionnaire-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: var(--text-light);
+    min-height: 100vh;
+}
+
+.questionnaire-back-navigation {
+    margin-bottom: 20px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--text-light);
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.back-button:hover {
+    background: var(--background-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:active {
+    transform: translateY(0);
+}
+
+.questionnaire-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--text-light);
+    border-radius: var(--border-radius-large);
+}
+
+.questionnaire-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.questionnaire-description {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Form Styles
+   ========================================================================== */
+
+.questionnaire-form {
+    background: var(--text-light);
+    border-radius: var(--border-radius-large);
+    padding: 40px;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-color);
+}
+
+.question-group {
+    margin-bottom: 32px;
+}
+
+.question-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+}
+
+.question-label::after {
+    content: '';
+}
+
+.question-label:has(+ .form-input[required])::after,
+.question-label:has(+ .form-textarea[required])::after,
+.question-label:has(+ .form-select[required])::after {
+    content: ' *';
+    color: #e74c3c;
+}
+
+/* Form Inputs */
+.form-input,
+.form-textarea,
+.form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--text-light);
+    color: var(--text-primary);
+    box-sizing: border-box;
+}
+
+/* Prevent browser default validation styling */
+.form-input:invalid,
+.form-textarea:invalid,
+.form-select:invalid {
+    border-color: var(--border-color) !important;
+    box-shadow: none !important;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(61, 65, 164, 0.1);
+}
+
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+    border-color: #e74c3c;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Radio and Checkbox Options */
+.radio-option,
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 8px 0;
+}
+
+.radio-option:last-child,
+.checkbox-option:last-child {
+    margin-bottom: 0;
+}
+
+.radio-option input[type="radio"],
+.checkbox-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.radio-label,
+.checkbox-label {
+    cursor: pointer;
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.radio-label:hover,
+.checkbox-label:hover {
+    color: var(--primary-color);
+}
+
+/* Question Help Text */
+.question-help {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   Submit Section
+   ========================================================================== */
+
+.questionnaire-submit {
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.questionnaire-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--text-light);
+    border: none;
+    padding: 16px 40px;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(61, 65, 164, 0.2);
+}
+
+.questionnaire-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(61, 65, 164, 0.3);
+}
+
+.questionnaire-btn:active {
+    transform: translateY(0);
+}
+
+.privacy-note {
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .questionnaire-container {
+        padding: 20px 16px;
+    }
+    
+    .questionnaire-header {
+        padding: 24px 20px;
+        margin-bottom: 30px;
+    }
+    
+    .questionnaire-header h1 {
+        font-size: 2rem;
+    }
+    
+    .questionnaire-description {
+        font-size: 1rem;
+    }
+    
+    .questionnaire-form {
+        padding: 30px 20px;
+    }
+    
+    .question-group {
+        margin-bottom: 24px;
+    }
+    
+    .form-input,
+    .form-textarea,
+    .form-select {
+        padding: 12px 14px;
+    }
+    
+    .questionnaire-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .questionnaire-container {
+        padding: 16px 12px;
+    }
+    
+    .questionnaire-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .questionnaire-form {
+        padding: 24px 16px;
+    }
+    
+    .radio-option,
+    .checkbox-option {
+        align-items: flex-start;
+    }
+    
+    .radio-option input[type="radio"],
+    .checkbox-option input[type="checkbox"] {
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+}
+
+/* ==========================================================================
+   Loading and Success States
+   ========================================================================== */
+
+.questionnaire-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.questionnaire-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.questionnaire-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--text-light);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}

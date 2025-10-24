@@ -1,0 +1,122 @@
+/* Drag & Drop Group Creation Styles */
+.group-preview {
+    transition: all 0.3s ease;
+}
+
+.group-preview-source {
+    opacity: 0.8;
+    transform: scale(0.98);
+    box-shadow: 0 4px 8px rgba(0, 124, 186, 0.3);
+}
+
+.group-preview-target {
+    border: 2px dashed #007cba !important;
+    background-color: rgba(0, 124, 186, 0.1) !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 124, 186, 0.4);
+}
+
+.potential-drop-target {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.potential-drop-target:hover {
+    background-color: rgba(0, 124, 186, 0.05);
+    border: 1px solid rgba(0, 124, 186, 0.3);
+}
+
+.drop-target-active {
+    background-color: rgba(0, 124, 186, 0.1) !important;
+    border: 1px solid #007cba !important;
+}
+
+.group-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: #007cba;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: pulse 1s infinite;
+}
+
+.group-indicator::before {
+    content: "👥";
+    font-size: 10px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Zone-specific styles for better visual feedback */
+.position-change-target {
+    border: 2px solid #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.1) !important;
+    position: relative;
+}
+
+.position-change-target::before {
+    content: "↕️ Reihenfolge ändern";
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 20;
+}
+
+.group-creation-target::before {
+    content: "👥 Gruppe bilden";
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #007cba;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 20;
+}
+
+/* Enhanced drag feedback */
+.sortable-ghost {
+    opacity: 0.5;
+    background: rgba(0, 124, 186, 0.1);
+    border: 2px dashed #007cba;
+}
+
+.sortable-chosen {
+    transform: rotate(2deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sortable-drag {
+    transform: rotate(-2deg);
+}

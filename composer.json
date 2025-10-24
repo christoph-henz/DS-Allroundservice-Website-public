@@ -1,0 +1,18 @@
+{
+    "name": "chris/dionysosv2",
+    "autoload": {
+        "psr-4": {
+            "DSAllround\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Christoph Henz",
+            "email": "christophhenz@gmail.com"
+        }
+    ],
+    "require": {
+        "tecnickcom/tcpdf": "^6.10",
+        "tecnick.com/tcpdf": "^6.10"
+    }
+}

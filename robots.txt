@@ -1,0 +1,146 @@
+# Robots.txt für DS-Allroundservice.de
+# Generiert am: 22.10.2025
+
+# Standardregeln für alle Bots
+User-agent: *
+
+# Erlaubte Bereiche (explizit erlaubt)
+Allow: /
+Allow: /public/
+Allow: /public/assets/
+Allow: /public/assets/css/
+Allow: /public/assets/js/
+Allow: /public/assets/img/
+Allow: /umzug
+Allow: /transport
+Allow: /entruempelung
+Allow: /hausmeister
+Allow: /reinigung
+Allow: /contact
+Allow: /impressum
+Allow: /datenschutz
+Allow: /agb
+
+# Gesperrte Bereiche
+Disallow: /admin/
+Disallow: /api/
+Disallow: /vendor/
+Disallow: /src/
+Disallow: /config/
+Disallow: /debug/
+Disallow: /data/
+Disallow: /tests/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.htaccess
+Disallow: /auth_middleware.php
+Disallow: /check_permissions_table.php
+Disallow: /database.db
+Disallow: /db-*.sql
+Disallow: /*.md$
+Disallow: /*.txt$ 
+Disallow: /*.log$
+Disallow: /*.backup$
+Disallow: /index_*.php
+
+# Spezielle Bereiche
+Disallow: /login
+Disallow: /logout
+Disallow: /reset-password
+Disallow: /questionnaire/
+Disallow: /offers/
+Disallow: /submissions/
+
+# Temporäre oder Test-Dateien
+Disallow: /test*
+Disallow: /*test*
+Disallow: /temp*
+Disallow: /*temp*
+Disallow: /backup*
+Disallow: /*backup*
+
+# Parameter und Session-URLs blockieren
+Disallow: /*?
+Disallow: /*&
+Disallow: /*sessionid=
+Disallow: /*PHPSESSID=
+
+# Spezifische Bot-Regeln
+
+# Google Bot - Vollzugriff auf öffentliche Bereiche
+User-agent: Googlebot
+Allow: /
+Allow: /public/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /debug/
+Disallow: /data/
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Allow: /public/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /debug/
+Disallow: /data/
+
+# Facebook Bot (für Open Graph)
+User-agent: facebookexternalhit
+Allow: /
+Allow: /public/
+Disallow: /admin/
+Disallow: /api/
+
+# Twitter Bot
+User-agent: Twitterbot
+Allow: /
+Allow: /public/
+Disallow: /admin/
+Disallow: /api/
+
+# WhatsApp Bot
+User-agent: WhatsApp
+Allow: /
+Allow: /public/
+Disallow: /admin/
+Disallow: /api/
+
+# Schlechte Bots blockieren
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# Crawl-Delay für bestimmte Bots (Sekunden zwischen Anfragen)
+User-agent: Bingbot
+Crawl-delay: 1
+
+User-agent: Slurp
+Crawl-delay: 2
+
+# Sitemap-Verweis
+Sitemap: https://ds-allroundservice.de/sitemap.xml
+
+# Host-Angabe (bevorzugte Domain)
+Host: ds-allroundservice.de

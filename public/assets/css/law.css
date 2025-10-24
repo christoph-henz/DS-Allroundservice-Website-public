@@ -1,0 +1,345 @@
+/* ============================================
+   IMPRESSUM & DATENSCHUTZ LAYOUT
+   Professionelles Layout für rechtliche Seiten
+   ============================================ */
+
+/* Container & Grundstruktur */
+.impressum-content,
+.datenschutz-content {
+    background-image: url('../img/title.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    padding: 60px 0 80px;
+}
+
+/* Overlay für bessere Lesbarkeit */
+.impressum-content::before,
+.datenschutz-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(245, 247, 250, 0.92) 0%, rgba(195, 207, 226, 0.95) 100%);
+    z-index: 0;
+}
+
+.impressum-content .container,
+.datenschutz-content .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hauptüberschrift */
+.impressum-content h1,
+.datenschutz-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1a202c;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.impressum-content h1::after,
+.datenschutz-content h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+/* Sektionen */
+.impressum-section,
+.datenschutz-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 35px 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 
+                0 10px 20px rgba(0, 0, 0, 0.05),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.impressum-section:hover,
+.datenschutz-section:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1), 
+                0 15px 30px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-left-color: #667eea;
+}
+
+/* Sektions-Überschriften */
+.impressum-section h2,
+.datenschutz-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.impressum-section h3,
+.datenschutz-section h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Text-Styling */
+.impressum-section p,
+.datenschutz-section p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.impressum-section p:last-child,
+.datenschutz-section p:last-child {
+    margin-bottom: 0;
+}
+
+.impressum-section strong,
+.datenschutz-section strong {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* Links */
+.impressum-section a,
+.datenschutz-section a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.impressum-section a:hover,
+.datenschutz-section a:hover {
+    color: #764ba2;
+    border-bottom-color: #764ba2;
+}
+
+/* Listen */
+.impressum-section ul,
+.datenschutz-section ul,
+.impressum-section ol,
+.datenschutz-section ol {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.impressum-section li,
+.datenschutz-section li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #4a5568;
+    margin-bottom: 8px;
+}
+
+/* Spezielle Hervorhebungen */
+.highlight-box {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-left: 4px solid #667eea;
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.highlight-box p {
+    margin: 0;
+}
+
+/* Kontakt-Info spezial */
+.impressum-section p br + strong {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .impressum-content,
+    .datenschutz-content {
+        padding: 40px 0 60px;
+        background-attachment: scroll;
+    }
+    
+    .impressum-content::before,
+    .datenschutz-content::before {
+        background: linear-gradient(135deg, rgba(245, 247, 250, 0.95) 0%, rgba(195, 207, 226, 0.97) 100%);
+    }
+    
+    .impressum-content h1,
+    .datenschutz-content h1 {
+        font-size: 2.2rem;
+        margin-bottom: 35px;
+    }
+    
+    .impressum-section,
+    .datenschutz-section {
+        padding: 25px 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+    
+    .impressum-section h2,
+    .datenschutz-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .impressum-section h3,
+    .datenschutz-section h3 {
+        font-size: 1.2rem;
+        margin-top: 20px;
+    }
+    
+    .impressum-section p,
+    .datenschutz-section p,
+    .impressum-section li,
+    .datenschutz-section li {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .impressum-content .container,
+    .datenschutz-content .container {
+        padding: 0 15px;
+    }
+    
+    .impressum-content h1,
+    .datenschutz-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .impressum-section,
+    .datenschutz-section {
+        padding: 20px 16px;
+    }
+}
+
+/* Animationen */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.impressum-section,
+.datenschutz-section {
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.impressum-section:nth-child(1) { animation-delay: 0.1s; }
+.impressum-section:nth-child(2) { animation-delay: 0.2s; }
+.impressum-section:nth-child(3) { animation-delay: 0.3s; }
+.impressum-section:nth-child(4) { animation-delay: 0.4s; }
+.impressum-section:nth-child(5) { animation-delay: 0.5s; }
+.impressum-section:nth-child(6) { animation-delay: 0.6s; }
+
+.datenschutz-section:nth-child(1) { animation-delay: 0.1s; }
+.datenschutz-section:nth-child(2) { animation-delay: 0.2s; }
+.datenschutz-section:nth-child(3) { animation-delay: 0.3s; }
+.datenschutz-section:nth-child(4) { animation-delay: 0.4s; }
+.datenschutz-section:nth-child(5) { animation-delay: 0.5s; }
+.datenschutz-section:nth-child(6) { animation-delay: 0.6s; }
+.datenschutz-section:nth-child(7) { animation-delay: 0.7s; }
+.datenschutz-section:nth-child(8) { animation-delay: 0.8s; }
+
+/* Print-Optimierung */
+@media print {
+    .impressum-content,
+    .datenschutz-content {
+        background: white;
+        padding: 0;
+    }
+    
+    .impressum-content::before,
+    .datenschutz-content::before {
+        display: none;
+    }
+    
+    .impressum-section,
+    .datenschutz-section {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #e2e8f0;
+        page-break-inside: avoid;
+    }
+    
+    .impressum-section:hover,
+    .datenschutz-section:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* Barrierefreiheit */
+.impressum-section:focus,
+.datenschutz-section:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Tabellen-Support (falls benötigt) */
+.impressum-section table,
+.datenschutz-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.impressum-section th,
+.datenschutz-section th {
+    background: #f7fafc;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #2d3748;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.impressum-section td,
+.datenschutz-section td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #4a5568;
+}
+
+.impressum-section tr:last-child td,
+.datenschutz-section tr:last-child td {
+    border-bottom: none;
+}

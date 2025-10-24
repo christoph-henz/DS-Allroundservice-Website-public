@@ -1,0 +1,15 @@
+# MINIMAL .htaccess for testing
+# No PHP directives, just basic rewriting
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+# Direct file access for SEO files (robots.txt, sitemap.xml)
+RewriteCond %{REQUEST_URI} ^/(robots\.txt|sitemap\.xml)$ [NC]
+RewriteRule ^(.*)$ - [L]
+
+# Standard routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]

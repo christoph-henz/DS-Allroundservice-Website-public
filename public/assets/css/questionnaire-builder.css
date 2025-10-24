@@ -1,0 +1,1596 @@
+/* ==========================================================================
+   Questionnaire Builder Drag & Drop Styles
+   ========================================================================== */
+
+/* Import base styles */
+@import url('home.css');
+
+:root {
+    --builder-primary: #3d41a4;
+    --builder-secondary: #5660c7;
+    --builder-success: #28a745;
+    --builder-warning: #fd7e14;
+    --builder-danger: #dc3545;
+    --builder-bg: #f8fafc;
+    --builder-card: #ffffff;
+    --builder-border: #e2e8f0;
+    --builder-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --builder-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   Main Layout
+   ========================================================================== */
+
+.questionnaire-builder {
+    background: var(--builder-bg);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.builder-header {
+    background: var(--builder-card);
+    border-radius: 12px;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--builder-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.builder-header h1 {
+    margin: 0;
+    color: var(--builder-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.builder-subtitle {
+    margin: 4px 0 0 0;
+    color: #6c757d;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.builder-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.builder-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    height: calc(100vh - 200px);
+}
+
+/* ==========================================================================
+   Sidebar - Available Questions
+   ========================================================================== */
+
+.builder-sidebar {
+    background: var(--builder-card);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--builder-shadow);
+    height: fit-content;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.builder-sidebar h3 {
+    margin: 0 0 20px 0;
+    color: var(--builder-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.question-type-group h4 {
+    margin: 0 0 16px 0;
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--builder-border);
+    padding-bottom: 8px;
+}
+
+.new-question-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ==========================================================================
+   Question Items (Draggable)
+   ========================================================================== */
+
+.question-item {
+    background: var(--builder-card);
+    border: 2px solid var(--builder-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: grab;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.question-item:hover {
+    border-color: var(--builder-secondary);
+    box-shadow: var(--builder-shadow);
+    transform: translateY(-1px);
+}
+
+.question-item:active,
+.question-item.dragging {
+    cursor: grabbing;
+    transform: scale(1.02);
+    box-shadow: var(--builder-shadow-hover);
+    z-index: 1000;
+}
+
+.question-item.new-question {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-style: dashed;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+}
+
+.question-item.new-question:hover {
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    border-color: var(--builder-primary);
+}
+
+/* Question Item Layout */
+.question-drag-handle {
+    color: #adb5bd;
+    cursor: grab;
+}
+
+.question-drag-handle:hover {
+    color: var(--builder-primary);
+}
+
+.question-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.question-type-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--builder-primary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+}
+
+.question-details {
+    flex: 1;
+}
+
+.question-text {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #212529;
+    line-height: 1.3;
+}
+
+.question-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.question-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-required {
+    background: var(--builder-danger);
+    color: white;
+}
+
+.question-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.question-item:hover .question-actions {
+    opacity: 1;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #6c757d;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background: #f8f9fa;
+    color: var(--builder-primary);
+}
+
+/* ==========================================================================
+   Main Content Area - Groups
+   ========================================================================== */
+
+.builder-main {
+    background: var(--builder-card);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--builder-shadow);
+    overflow-y: auto;
+}
+
+.groups-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.question-group {
+    border: 2px solid var(--builder-border);
+    border-radius: 12px;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.question-group:hover {
+    border-color: var(--builder-secondary);
+}
+
+.question-group.drag-over {
+    border-color: var(--builder-success);
+    background: #f8fff9;
+}
+
+.question-group.ungrouped {
+    border-color: var(--builder-warning);
+    border-style: dashed;
+}
+
+.group-header {
+    padding: 16px 20px;
+    background: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--builder-border);
+}
+
+.group-title {
+    flex: 1;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--builder-primary);
+}
+
+.group-description {
+    margin: 4px 0 0 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.group-description.placeholder {
+    color: #adb5bd;
+    cursor: pointer;
+}
+
+.group-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.questions-list {
+    padding: 20px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.questions-list .question-item {
+    background: white;
+    border-color: #dee2e6;
+}
+
+.drop-zone-add-question {
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #adb5bd;
+    transition: all 0.2s ease;
+}
+
+.drop-zone-add-question:hover,
+.drop-zone-add-question.drag-over {
+    border-color: var(--builder-success);
+    background: #f8fff9;
+    color: var(--builder-success);
+}
+
+/* ==========================================================================
+   New Group Drop Zone
+   ========================================================================== */
+
+.drop-zone-new-group {
+    border: 3px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.drop-zone-new-group:hover,
+.drop-zone-new-group.drag-over {
+    border-color: var(--builder-success);
+    background: #f8fff9;
+}
+
+.drop-zone-content h4 {
+    margin: 8px 0 4px 0;
+    color: #495057;
+    font-weight: 600;
+}
+
+.drop-zone-content p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.drop-zone-new-group.drag-over .drop-zone-content h4 {
+    color: var(--builder-success);
+}
+
+/* ==========================================================================
+   Sortable.js Override Styles
+   ========================================================================== */
+
+.sortable-ghost {
+    opacity: 0.4;
+    background: #e3f2fd !important;
+    border-color: var(--builder-primary) !important;
+}
+
+.sortable-chosen {
+    box-shadow: var(--builder-shadow-hover) !important;
+    transform: scale(1.02) !important;
+}
+
+.sortable-drag {
+    opacity: 1 !important;
+    box-shadow: var(--builder-shadow-hover) !important;
+    transform: rotate(3deg) !important;
+    z-index: 9999 !important;
+}
+
+/* ==========================================================================
+   Enhanced Drag & Drop Visual Feedback
+   ========================================================================== */
+
+/* Question-on-Question Drop Target */
+.question-item.drop-target {
+    background: linear-gradient(145deg, #e8f5e8, #f0f8f0) !important;
+    border: 2px dashed var(--builder-success) !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 4px 20px rgba(40, 167, 69, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.question-item.drop-target::after {
+    content: "Gruppe erstellen";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: var(--builder-success);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 10;
+}
+
+/* Enhanced Group Drop Zone */
+.question-group .questions-list.drag-over {
+    background: #f8f9ff;
+    border: 2px dashed var(--builder-primary);
+    border-radius: 8px;
+    min-height: 60px;
+}
+
+.question-group .questions-list.drag-over::before {
+    content: "Frage hier ablegen";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--builder-primary);
+    font-weight: 600;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* Empty Group Hover Effect */
+.questions-list:empty:hover {
+    background: #f8f9ff;
+    border: 1px dashed #cbd5e0;
+    min-height: 40px;
+    border-radius: 6px;
+}
+
+/* Group Header Drag Handle */
+.group-header {
+    cursor: move;
+    transition: all 0.2s ease;
+}
+
+.group-header:hover {
+    background: #f8f9ff;
+    transform: translateX(2px);
+}
+
+/* Question Drag Handle Enhanced */
+.question-drag-handle {
+    opacity: 0.6;
+    transition: all 0.2s ease;
+}
+
+.question-item:hover .question-drag-handle {
+    opacity: 1;
+    color: var(--builder-primary);
+}
+
+/* Direct Grouping Visual Feedback */
+.potential-drop-target {
+    background-color: #f0f9ff !important;
+    border: 2px dashed #0ea5e9 !important;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.drop-target-active {
+    background-color: #dcfce7 !important;
+    border: 2px solid #16a34a !important;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+    transform: scale(1.02);
+    animation: pulse-green 1s infinite;
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* Zone-based Drop Targets */
+.group-creation-target {
+    background-color: #fef3c7 !important;
+    border: 2px solid #f59e0b !important;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+    transform: scale(1.02);
+    animation: pulse-orange 1s infinite;
+}
+
+.position-change-target {
+    background-color: #e0e7ff !important;
+    border: 2px dashed #6366f1 !important;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    transform: scale(1.01);
+}
+
+@keyframes pulse-orange {
+    0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+.sort-handle {
+    cursor: grab;
+    padding: 8px;
+    color: #6b7280;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-handle:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+    cursor: grabbing;
+}
+
+.sort-handle:active {
+    cursor: grabbing;
+    background-color: #e5e7eb;
+}
+
+/* Group Preview Styles */
+.group-preview {
+    border: 2px solid var(--builder-primary) !important;
+    background-color: rgba(61, 65, 164, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(61, 65, 164, 0.2) !important;
+}
+
+.group-preview-source {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+.group-preview-target {
+    background-color: rgba(61, 65, 164, 0.1) !important;
+    animation: groupPreviewPulse 1s infinite;
+}
+
+@keyframes groupPreviewPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Group Indicator */
+.group-indicator {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.group-indicator-content {
+    background: linear-gradient(135deg, var(--builder-primary), var(--builder-secondary));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: groupIndicatorFadeIn 0.3s ease-out;
+}
+
+.group-indicator-content i {
+    font-size: 10px;
+}
+
+@keyframes groupIndicatorFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Enhanced cursor styles during drag */
+.sortable-drag {
+    cursor: grabbing !important;
+}
+
+.potential-drop-target {
+    cursor: copy !important;
+}
+
+/* Smooth animations for group creation */
+.question-group {
+    animation: groupFadeIn 0.3s ease-out;
+}
+
+@keyframes groupFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Modal Styles
+   ========================================================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    padding: 24px 24px 16px 24px;
+    border-bottom: 1px solid var(--builder-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--builder-primary);
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #adb5bd;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #f8f9fa;
+    color: var(--builder-danger);
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    padding: 16px 24px 24px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid var(--builder-border);
+}
+
+/* ==========================================================================
+   Form Styles
+   ========================================================================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--builder-border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--builder-primary);
+    box-shadow: 0 0 0 3px rgba(61, 65, 164, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.options-group {
+    display: none;
+}
+
+.options-group.show {
+    display: block;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.checkmark {
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    justify-content: center;
+    line-height: 1.5;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--builder-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--builder-secondary);
+    box-shadow: var(--builder-shadow);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    box-shadow: var(--builder-shadow);
+}
+
+.btn-success {
+    background: var(--builder-success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+    box-shadow: var(--builder-shadow);
+}
+
+.btn-danger {
+    background: var(--builder-danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    box-shadow: var(--builder-shadow);
+}
+
+/* ==========================================================================
+   Icons (FontAwesome-like)
+   ========================================================================== */
+
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+}
+
+.icon-eye::before { content: '👁️'; }
+.icon-save::before { content: '💾'; }
+.icon-text::before { content: '📝'; }
+.icon-email::before { content: '📧'; }
+.icon-phone::before { content: '📞'; }
+.icon-list::before { content: '📋'; }
+.icon-radio::before { content: '🔘'; }
+.icon-checkbox::before { content: '☑️'; }
+.icon-textarea::before { content: '📄'; }
+.icon-date::before { content: '📅'; }
+.icon-number::before { content: '🔢'; }
+.icon-drag::before { content: '⋮⋮'; }
+.icon-edit::before { content: '✏️'; }
+.icon-trash::before { content: '🗑️'; }
+.icon-plus::before { content: '➕'; }
+.icon-plus-circle::before { content: '⊕'; }
+.icon-question::before { content: '❓'; }
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+    .builder-content {
+        grid-template-columns: 280px 1fr;
+        gap: 16px;
+    }
+    
+    .builder-sidebar {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .builder-content {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .builder-sidebar {
+        order: 2;
+        margin-top: 20px;
+    }
+    
+    .builder-main {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .questionnaire-builder {
+        padding: 10px 0;
+    }
+    
+    .builder-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+    }
+    
+    .builder-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .builder-actions .btn {
+        flex: 1;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   Admin Integration Styles
+   ========================================================================== */
+
+/* Admin-specific drag and drop styles */
+.admin-panel .questions-section {
+    position: relative;
+}
+
+.admin-panel .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-panel .section-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-panel .section-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.admin-panel .btn.active {
+    background: var(--builder-primary);
+    color: white;
+    border-color: var(--builder-primary);
+}
+
+/* Question Palette in Admin */
+.admin-panel .question-palette {
+    background: var(--builder-card);
+    border: 1px solid var(--builder-border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: var(--builder-shadow);
+}
+
+.admin-panel .palette-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--builder-border);
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.admin-panel .palette-header h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.admin-panel .palette-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    padding: 20px;
+}
+
+.admin-panel .palette-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 12px;
+    border: 2px dashed var(--builder-border);
+    border-radius: 6px;
+    cursor: grab;
+    transition: all 0.2s ease;
+    background: white;
+    text-align: center;
+}
+
+.admin-panel .palette-item:hover {
+    border-color: var(--builder-primary);
+    border-style: solid;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-panel .palette-item:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+}
+
+.admin-panel .palette-item i {
+    font-size: 24px;
+    color: var(--builder-primary);
+    margin-bottom: 8px;
+}
+
+.admin-panel .palette-item span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+}
+
+/* New Group Zone in Admin */
+.admin-panel .new-group-zone {
+    margin-bottom: 20px;
+}
+
+.admin-panel .new-group-zone .drop-zone {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.admin-panel .new-group-zone .drop-zone.drag-over {
+    border-color: var(--builder-primary);
+    background: rgba(61, 65, 164, 0.05);
+    transform: scale(1.02);
+}
+
+.admin-panel .new-group-zone .drop-zone i {
+    font-size: 32px;
+    color: #aaa;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.admin-panel .new-group-zone .drop-zone p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Questions Container in Admin */
+.admin-panel .questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-panel .groups-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+/* Question Groups in Admin */
+.admin-panel .question-group {
+    background: var(--builder-card);
+    border: 1px solid var(--builder-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--builder-shadow);
+    transition: all 0.2s ease;
+}
+
+.admin-panel .question-group:hover {
+    box-shadow: var(--builder-shadow-hover);
+}
+
+.admin-panel .question-group.ungrouped-questions {
+    border-color: #e9ecef;
+    background: #f8f9fa;
+}
+
+.admin-panel .group-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid var(--builder-border);
+    cursor: default; /* Remove grab cursor from header */
+    gap: 12px;
+}
+
+.admin-panel .group-info {
+    flex: 1;
+}
+
+.admin-panel .group-drag-handle {
+    cursor: grab;
+    padding: 8px;
+    color: #666;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.admin-panel .group-drag-handle:hover {
+    color: var(--builder-primary);
+}
+
+.admin-panel .group-drag-handle:active {
+    cursor: grabbing;
+}
+
+.admin-panel .group-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.admin-panel .group-header h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.admin-panel .group-description {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.admin-panel .group-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Question Items in Admin */
+.admin-panel .questions-list {
+    min-height: 60px;
+    padding: 12px;
+}
+
+.admin-panel .question-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: white;
+    border: 1px solid var(--builder-border);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.admin-panel .question-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--builder-primary);
+}
+
+.admin-panel .question-item:last-child {
+    margin-bottom: 0;
+}
+
+.admin-panel .question-drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: #999;
+    cursor: grab;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.admin-panel .question-drag-handle:hover {
+    background: #f0f0f0;
+    color: var(--builder-primary);
+}
+
+.admin-panel .question-drag-handle:active {
+    cursor: grabbing;
+}
+
+.admin-panel .question-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-panel .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.admin-panel .question-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-panel .question-info .question-number {
+    font-weight: 600;
+    color: var(--builder-primary);
+    margin-right: 8px;
+}
+
+.admin-panel .question-info .question-text {
+    font-weight: 500;
+    color: #333;
+    margin-right: 12px;
+}
+
+.admin-panel .question-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+/* Empty states in Admin */
+.admin-panel .empty-message,
+.admin-panel .empty-group-message {
+    text-align: center;
+    padding: 32px 20px;
+    color: #666;
+}
+
+.admin-panel .empty-message i,
+.admin-panel .empty-group-message i {
+    font-size: 32px;
+    color: #ccc;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.admin-panel .empty-group-message {
+    padding: 20px;
+    font-size: 14px;
+}
+
+.admin-panel .empty-group-message i {
+    font-size: 24px;
+}
+
+/* Sortable states in Admin */
+.admin-panel .sortable-ghost {
+    opacity: 0.5;
+    background: #f0f0f0 !important;
+    border: 2px dashed #ccc !important;
+}
+
+.admin-panel .sortable-chosen {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    transform: rotate(3deg);
+}
+
+.admin-panel .sortable-drag {
+    transform: rotate(5deg);
+    opacity: 0.8;
+}
+
+/* Badges in Admin */
+.admin-panel .badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+.admin-panel .badge-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+/* Zone-Based Drop Target Styles */
+.question-item.group-creation-target {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 3px dashed #28a745;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+.question-item.group-creation-target::before {
+    content: '🔗 Neue Gruppe erstellen';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.question-item.position-change-target {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 3px dashed #ffc107;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+.question-item.position-change-target::before {
+    content: '↕️ Position ändern';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffc107;
+    color: #212529;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+/* Group Preview Styles */
+.question-item.group-preview {
+    border: 2px solid #007bff;
+    background: rgba(0, 123, 255, 0.1);
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+.question-item.group-preview-source {
+    border-color: #28a745;
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.question-item.group-preview-target {
+    border-color: #17a2b8;
+    background: rgba(23, 162, 184, 0.1);
+}
+
+.group-indicator {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.group-indicator-content {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.group-indicator-content i {
+    font-size: 14px;
+}
+
+/* Enhanced drag states */
+.question-item.sortable-drag {
+    opacity: 0.8;
+    transform: rotate(2deg) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+.question-item.potential-drop-target {
+    border: 2px dashed #6c757d;
+    background: rgba(108, 117, 125, 0.05);
+    transition: all 0.2s ease;
+}
+
+.question-item.potential-drop-target:hover {
+    border-color: #007bff;
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.admin-panel .badge-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+/* Admin responsive */
+@media (max-width: 768px) {
+    .admin-panel .palette-items {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 16px;
+    }
+    
+    .admin-panel .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .admin-panel .question-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .admin-panel .group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .admin-panel .group-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* ==========================================================================
+   Fixed Contact Fields Styles
+   ========================================================================== */
+
+/* Fixed group container */
+.question-group.fixed-group {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #6c757d;
+    position: relative;
+}
+
+.question-group.fixed-group::before {
+    content: '🔒';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    opacity: 0.3;
+}
+
+.question-group.fixed-group .group-header {
+    background: rgba(108, 117, 125, 0.1);
+    border-bottom: 2px solid #6c757d;
+}
+
+/* Fixed group badge */
+.badge-fixed {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-fixed::before {
+    content: '🔒';
+    font-size: 0.9em;
+}
+
+/* Fixed question item */
+.question-item.fixed-question {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-left: 4px solid #6c757d;
+    opacity: 0.95;
+    cursor: not-allowed;
+}
+
+.question-item.fixed-question .question-drag-handle {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.question-item.fixed-question .question-drag-handle i {
+    color: #999;
+}
+
+/* Fixed question badge */
+.badge-fixed-small {
+    background: #6c757d;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Disabled button for fixed items */
+.question-item.fixed-question .btn-icon[disabled],
+.question-group.fixed-group .btn-icon[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #e9ecef;
+}
+
+.question-item.fixed-question .btn-icon[disabled]:hover,
+.question-group.fixed-group .btn-icon[disabled]:hover {
+    background: #e9ecef;
+    transform: none;
+}
+
+/* Prevent drag for fixed items */
+.question-item.fixed-question[draggable="true"] {
+    cursor: not-allowed !important;
+}
+
+.question-group.fixed-group .group-header {
+    cursor: default !important;
+}
+
+/* Icon lock style */
+.icon-lock::before {
+    content: '🔒';
+}
+
+/* Tooltip for fixed items */
+.question-item.fixed-question:hover::after,
+.question-group.fixed-group:hover::after {
+    content: 'Diese Kontaktfelder sind fest und können nicht bearbeitet oder gelöscht werden';
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+}
+
